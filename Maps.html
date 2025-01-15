@@ -1,0 +1,325 @@
+<html lang="en" data-lt-installed="true"><head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://bowercdn.net/c/es6-promise-3.2.2/es6-promise.min.js" integrity="sha384-GF7IR8yT5028AbfHnSJSxX0Y1D+sicFNHXDyV1Hzcf4EISXdjP8uW0Q/0yFIHpTD" crossorigin="anonymous"></script>
+<script src="https://bowercdn.net/c/fetch-1.0.0/fetch.js" integrity="sha384-j9GCh0V617Ks+uEOZnAhwzTOWu5lPIlPW3QYRSfEwXd+x7VqP1XHNLgj3AIX7Mo0" crossorigin="anonymous"></script>
+	<title>Trips Barrocal</title>
+	
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+	      .map {
+        width: 100%;
+        height: 400px;
+		z-index:-1;
+		display:none;
+      }
+      table.controls td {
+        padding: 2px 5px;
+      }
+      table.controls td:nth-child(3) {
+        text-align: right;
+        min-width: 4.5em;
+      }
+	  #sideBar{
+		position:fixed;
+		right:0;
+		bottom:0;
+		height:100%;
+		z-index:1;
+		background-image:url("Castle.png") no-repeat width:100%;
+	  }	  
+	  #barr{
+		display:none;
+		position:fixed;
+		right:0;
+		bottom:0;
+		height:100%;
+		width:20%;
+		z-index:1;
+		background-color:purple;
+		opacity:0.9;
+	  }
+	  
+	  #info_container{
+		display:none;
+		padding:10%;
+				
+		}
+	  
+	  #info_text_container{
+		padding:10%;
+				
+		}
+	  
+	  
+	  #info_text_container_header{
+		padding:8%;
+				
+		}
+	  
+	  .leaflet-control{
+			height: 1%;
+			size:1px;
+	  }
+
+	</style>
+
+
+
+	<style>body { padding: 0; margin: 0; } #map { height: 100%; width: 100vw; }</style>
+<style>:is([id*='google_ads_iframe'],[id*='taboola-'],.taboolaHeight,.taboola-placeholder,#top-ad,#credential_picker_container,#credentials-picker-container,#credential_picker_iframe,[id*='google-one-tap-iframe'],#google-one-tap-popup-container,.google-one-tap__module,.google-one-tap-modal-div,#amp_floatingAdDiv,#ez-content-blocker-container) {display:none!important;min-height:0!important;height:0!important;}</style><link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&amp;display=swap">
+
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+</head>
+<body data-new-gr-c-s-check-loaded="14.1211.0" data-gr-ext-installed="">
+
+<div id="map" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: fixed; display:inline; outline-style: none;"></div>
+<div id='sideBar'><!--<img src="Castle.png">--></img></div>
+<div id='sideBar2'><div id="barr" >
+<div id="info_container">
+<h1 id="info_text_container_header"></h1>
+<p id="info_text_container"></p>
+</div>
+
+</div>
+<script src="L.KML.js"></script>
+
+<script>
+
+
+
+
+function success(position) {
+	  console.log(position);
+map.setView([position.coords.latitude,position.coords.longitude], 12,5);
+mostraMedia()
+}
+
+navigator.geolocation.getCurrentPosition(success);
+				const map = L.map('map').fitWorld();
+	map.addControl(new L.Control.Fullscreen());
+
+//https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}
+
+
+		
+		 fullscreenControl: {
+        pseudoFullscreen: true // if true, fullscreen to page width and height
+    }
+
+	//	var Stadia_StamenWatercolor = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.{ext}', {
+//	minZoom: 1,
+//	country:true,
+//	locality:true,
+//	maxZoom: 16,//	minZoom: 10,
+//	attribution: '<a href="https://www.stadiamaps.com/" target="_blank">Stadia</a>  <a href="https://www.stamen.com/" target="_blank">Stamen <a href="https://openmaptiles.org/" target="_blank">OMT</a>  <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+//	ext: 'jpg'
+//}).addTo(map);
+		
+	const googleSat = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{
+	 maxZoom: 16,
+	 minZoom: 10,
+	fullscreenControl: true,
+     subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
+		
+		 fullscreenControl: {
+        pseudoFullscreen: true // if true, fullscreen to page width and height
+    }
+const addTrackAndBoundsFromKml = kmltext => {
+
+// Create new kml overlay
+ const parser = new DOMParser();
+ kml = parser.parseFromString(kmltext,"text/xml");
+
+ const track = new L.KML(kml);
+ map.addLayer(track);
+
+ // Adjust map to show the kml
+ map.fitBounds( track.getBounds() );
+
+};
+
+
+
+
+
+
+
+var casteloIcon = L.icon({
+    iconUrl: 'castelo.png',
+    iconSize:     [38, 70], // size of the icon
+    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+    shadowAnchor: [10, 10],  // the same for the shadow
+    popupAnchor:  [10, 10] // point from which the popup should open relative to the iconAnchor
+});
+
+var waterfallIcon = L.icon({
+    iconUrl: 'waterfall.png',
+    iconSize:     [50, 60], // size of the icon
+    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+    shadowAnchor: [10, 10],  // the same for the shadow
+    popupAnchor:  [10, 10] // point from which the popup should open relative to the iconAnchor
+});
+
+
+var ponteIcon = L.icon({
+    iconUrl: 'ponte.png',
+    iconSize:     [38, 20], // size of the icon
+    iconAnchor:   [-10, -20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [1, 1] // point from which the popup should open relative to the iconAnchor
+});
+
+
+var explorerIcon = L.icon({
+    iconUrl: 'explorer.png',
+    iconSize:     [38, 60], // size of the icon
+    iconAnchor:   [10,10], // point of the icon which will correspond to marker's location
+    popupAnchor:  [1, 1] // point from which the popup should open relative to the iconAnchor
+});
+
+
+
+
+// load KML file
+fetch('https://raw.githubusercontent.com/tiagoamaros/t/refs/heads/main/Percurso_Pedestre_Fonte_Benemola_VAlgarviana.kml')
+  .then( res => res.text() )
+  .then( addTrackAndBoundsFromKml);
+
+
+
+	function mostraMedia(){
+	
+		
+			const locationMedia = L.marker([37.157,-8.200],{icon: casteloIcon}).addTo(map).bindPopup("<div class='leaflet-popup-content' style='text-align:center;'><div class='sketchfab-embed-wrapper'> <iframe title='Castelo de Paderne' frameborder='0' allowfullscreen mozallowfullscreen='true' webkitallowfullscreen='true' allow='autoplay; fullscreen; xr-spatial-tracking' xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src='https://sketchfab.com/models/2861e73b91d7473980f6c2c3b0f257a4/embed?autostart=1&annotations_visible=0&annotation_cycle=10&ui_hint=0'> </iframe> </div><br><h2>Castelo de Paderne</h2><audio controls autoplay><source src='paderne1.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>").openPopup();
+			
+			const locationMediaa = L.marker([37.2317167,-8.1793819],{icon: waterfallIcon}).addTo(map).bindPopup("<div class='leaflet-popup-content' style='text-align:center;'> <img src='QuedaDoVigario.png' width='250px' height='300px' style='text-align:center;'></img><br><h2>Queda do Vigário</h2><audio controls autoplay><source src='paderne5.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>").openPopup();
+	
+			const locationMediaPonte = L.marker([37.155628,-8.1986848],{icon: ponteIcon}).addTo(map).bindPopup("<div class='leaflet-popup-content' width='500px' style='text-align:center;'><img src='PonteMedievalPaderne.png' width='250px' height='300px' ></img><br><h2>Ponte de Paderne</h2><br><audio controls autoplay><source src='paderne5.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>").openPopup();
+	
+			const locationCasteloSilves = L.marker([37.190806, -8.437892],{icon: ponteIcon}).addTo(map).bindPopup("<div class='leaflet-popup-content' width='500px' style='text-align:center;'><img src='PonteMedievalPaderne.png' width='250px' height='300px' ></img><br><h2>Ponte de Paderne</h2><br><audio controls autoplay><source src='paderne5.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>").openPopup();
+
+			const locationCasteloSalir = L.marker([37.242884, -8.046531],{icon: ponteIcon}).addTo(map).bindPopup("<div class='leaflet-popup-content' width='500px' style='text-align:center;'><img src='PonteMedievalPaderne.png' width='250px' height='300px' ></img><br><h2>Ponte de Paderne</h2><br><audio controls autoplay><source src='paderne5.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>").openPopup();
+
+
+	
+	}
+
+	function onLocationFound(e) {
+	mostraMedia();
+		const radius = e.accuracy / 2;
+
+		const locationMarker = L.marker(e.latlng,{icon: explorerIcon}).addTo(map)
+			.bindPopup("<div class='leaflet-popup-content' >You are here</div>").openPopup();
+			mostraMedia()
+		const locationCircle = L.circle(e.latlng, radius).addTo(map).bindPopup('<div class="leaflet-popup-content" >You are around here. <br> Approx. '+radius.toFixed(0)+' meters </div>');
+
+	}
+
+	function onLocationError(e) {
+		alert(e.message);
+	}
+
+	map.on('locationfound', onLocationFound);
+	//map.on('locationerror', onLocationError);
+	//
+	map.locate({setView: true, maxZoom: 16});
+	
+	
+	
+
+	  
+	  
+	  function showDiv(id){
+			
+			document.getElementById("info_container").style.display="inline";
+			document.getElementById("info_text_container_header").innerHTML=id;
+			
+			switch (id){
+			
+				case "Barrocal":
+					document.getElementById("info_text_container").innerHTML  = "O Barrocal fica entre a Serra e o Litoral";
+					break;
+				
+				case "Serra":
+					document.getElementById("info_text_container").innerHTML  = "A Serra é fixe";
+					break;
+				
+				case "Litoral":
+					document.getElementById("info_text_container").innerHTML  = "O litoral está overrated";
+					break;
+				
+			}			
+	  
+	  }
+	  
+	  
+
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
+}
+
+
+var elem = document.getElementById("map");
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+openFullscreen(map);
+
+
+var imageUrl = 'Algarve.jpg';
+var errorOverlayUrl = 'algarve.png';
+var altText = 'Image of Newark, N.J. in 1922. Source: The University of Texas at Austin, UT Libraries Map Collection.';
+var latLngBounds = L.latLngBounds([[36.87, -9.077743], [37.73580, -7.053512]]);
+
+var imageOverlay = L.imageOverlay(imageUrl, latLngBounds, {
+    opacity: 0.65,
+    errorOverlayUrl: errorOverlayUrl,
+    alt: altText,
+    interactive: true
+}).addTo(map);
+
+</script>
+
+
+<img src="Serra_Barrocal_litoral mapa.png" usemap="#image-map">
+
+
+<map name="image-map" >
+    <area target="_top" style id="Barrocal" title="Barrocal" onclick="showDiv(id)"  coords="138,186,176,165,181,180,203,179,234,171,262,148,282,139,302,140,329,129,382,141,399,150,415,181,459,189,474,197,502,197,562,187,567,196,546,209,508,218,477,233,456,242,439,231,419,240,393,233,362,217,310,204,283,209,246,197,215,192,190,199,173,185,137,195,110,221,86,226,82,210,122,184" shape="poly">
+	
+    <area target="_top" id="Serra" title="Serra" onclick="showDiv(id)"  coords="102,69,50,205,61,225,172,164,183,177,325,126,388,138,415,179,473,191,572,182,571,144,551,129,510,118,491,83,447,79,444,63,402,73,404,90,377,109,322,98,293,76,287,55,234,59,232,76,219,83,194,80,170,65,152,72,144,83,134,69" shape="poly">
+    
+	<area target="_top" id="Litoral" title="Litoral" onclick="showDiv(id)"  coords="88,226,89,235,129,235,134,220,168,214,194,220,235,231,254,222,278,238,328,230,415,283,450,293,573,204,574,184,566,196,526,213,477,233,456,242,438,231,421,239,389,231,360,217,311,208,276,209,218,193,189,199,170,185,138,193,109,219" shape="poly">
+</map>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
