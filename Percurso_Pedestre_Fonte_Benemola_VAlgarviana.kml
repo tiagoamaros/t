@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Percurso_Pedestre_ Fonte_Benemola_VAlgarviana</name>
+	<open>1</open>
+	<LookAt>
+		<longitude>-8.006989000000001</longitude>
+		<latitude>37.20773</latitude>
+		<altitude>0</altitude>
+		<heading>0</heading>
+		<tilt>0</tilt>
+		<range>1220</range>
+	</LookAt>
+	<StyleMap id="stylemap_id0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>4</width>
+		</LineStyle>
+	</Style>
+	<Style id="style0">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>4</width>
+		</LineStyle>
+	</Style>
+	<Style id="waypoint">
+		<IconStyle>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>Percurso_Pedestre_ Fonte_Benemola_VAlgarviana</name>
+		<styleUrl>#stylemap_id0</styleUrl>
+		<LineString>
+			<coordinates>
+				-8.00319968985823,37.20589422853296,136.16 -8.003182935884722,37.2063503214301,147.7 -8.003163060327282,37.20651235594246,145.78 -8.003295174627372,37.20662834919631,145.78 -8.003408279416037,37.20665418757984,145.78 -8.004313064750031,37.20640815766687,146.74 -8.004563184799983,37.20645264734728,146.74 -8.00487368367612,37.2065771743655,149.62 -8.005290217575865,37.20689518196772,150.58 -8.005362614838042,37.20689068605628,143.37 -8.005536016164049,37.20692096533229,143.37 -8.005899084217949,37.20684898987684,143.37 -8.005771028035172,37.20673534295108,143.37 -8.005704797740494,37.20654984111115,143.37 -8.00579542516269,37.20628928822465,143.37 -8.00601186230779,37.206102842465,140.49 -8.006503712385889,37.2063849773258,140.49 -8.00702171400189,37.2066863067448,140.49 -8.00748799927533,37.2070709522814,139.53 -8.00784942694008,37.2075576055795,140.97 -8.008337253704671,37.2080766130239,140.97 -8.008799515664579,37.2086915932596,143.37 -8.00935196690261,37.2092774882913,142.41 -8.00934526138008,37.2093023825437,141.45 -8.008694322779769,37.208552705124,140.01 -8.00822468474507,37.207995057106,137.13 -8.007739456370469,37.2075184620917,137.13 -8.00728700123727,37.2071818448603,141.93 -8.0066847614944,37.207027617842,146.26 -8.005915169831621,37.2068595880997,145.3 -8.005607807049195,37.20695278775036,145.3 -8.005434243273054,37.2069122093358,145.3 -8.005323144300172,37.20690846726347,145.3 -8.005288557371031,37.20689626973996,147.7 
+			</coordinates>
+		</LineString>
+	</Placemark>
+	<Placemark>
+		<name>Moinho Velho</name>
+		<styleUrl>#waypoint</styleUrl>
+		<Point>
+			<coordinates>-8.00599996000528,37.2061050217599,141.8262</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Nascentes da Várzea</name>
+		<styleUrl>#waypoint</styleUrl>
+		<Point>
+			<coordinates>-8.00784900784492,37.2075150255114,139.8641</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Fonte Benémola</name>
+		<styleUrl>#waypoint</styleUrl>
+		<Point>
+			<coordinates>-8.009361019358041,37.2092779912055,141.2297</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

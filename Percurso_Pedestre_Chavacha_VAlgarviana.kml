@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Percurso_Pedestre_Chavacha_VAlgarviana</name>
+	<open>1</open>
+	<LookAt>
+		<longitude>-7.994931</longitude>
+		<latitude>37.3491</latitude>
+		<altitude>0</altitude>
+		<heading>0</heading>
+		<tilt>0</tilt>
+		<range>542</range>
+	</LookAt>
+	<Style id="style">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>4</width>
+		</LineStyle>
+	</Style>
+	<Style id="style0">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>4</width>
+		</LineStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>Percurso_Pedestre_Chavacha_VAlgarviana</name>
+		<styleUrl>#stylemap_id0</styleUrl>
+		<LineString>
+			<coordinates>
+				-7.994124525363433,37.34968389292453,289.49 -7.994228782918472,37.34968958869072,287.09 -7.994275789435701,37.34968668115659,287.09 -7.994387994236122,37.34957004100055,287.09 -7.994556348271574,37.34939305373916,287.09 -7.994777464713341,37.34922948584117,287.09 -7.994878146525828,37.34916287855041,287.09 -7.994899375163735,37.34919880717369,287.09 -7.995148423137089,37.3495500421305,293.82 -7.995221012139608,37.34965449969695,293.82 -7.995354904525566,37.34977257485024,293.82 -7.9956099597847,37.34994167090304,293.82 
+			</coordinates>
+		</LineString>
+	</Placemark>
+	<Placemark>
+		<name>Moinho da Chavachã</name>
+		<LookAt>
+			<longitude>-7.993999422069717</longitude>
+			<latitude>37.350181391474</latitude>
+			<altitude>0</altitude>
+			<heading>37.85721287672074</heading>
+			<tilt>59.20843004953549</tilt>
+			<range>393.7465698667476</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-7.994484902453213,37.34959836027372,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Ribeira do Vascão</name>
+		<LookAt>
+			<longitude>-7.993999422069717</longitude>
+			<latitude>37.350181391474</latitude>
+			<altitude>0</altitude>
+			<heading>37.85721287672074</heading>
+			<tilt>59.20843004953549</tilt>
+			<range>393.7465698667476</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-7.995615012126814,37.34992763151561,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>
